@@ -1,0 +1,12 @@
+{
+  "name": "shopgate/cart-integration-magento2-metapackage",
+  "description": "Shopgate meta package containing the necessary modules to synchronize data across servers.",
+  "license": "Apache-2.0",
+  "version": "2.9.6",
+  "type": "metapackage",
+  "require": {
+    "shopgate/base": "2.9.7",
+    "shopgate/import": "2.9.4",
+    "shopgate/export": "2.9.6"
+  }
+}
