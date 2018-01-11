@@ -1,0 +1,30 @@
+dist: trusty
+sudo: false
+language: php
+
+install:
+- phpenv config-rm xdebug.ini || return 0
+
+jobs:
+  include:
+  - stage: deploy
+    php: 7.0
+    before_script: skip
+    script:
+    - if [[ "$TRAVIS_TAG" ]]; then
+        zip shopgate_m2-${TRAVIS_TAG}.zip composer.json;
+      fi
+    deploy:
+      provider: releases
+      api_key: ${GITHUB_TOKEN}
+      file: shopgate_m2-${TRAVIS_TAG}.zip
+      skip_cleanup: true
+      on:
+        tags: true
+
+notifications:
+  slack:
+    rooms:
+      secure: d4ocMu8Qye1NJM/KfxN4tSaNmVbTMJYhxarXjodcOJQ8LRHeSrG+H3RnF6hec9XLl41pBEcbA6oa7iSVH3AX28IVO3EM/bfiFKB9qSnDYkrBAWHBlf8l5IlffByG8FWIaO0XkD8ZsvQxmQikgehCkKnLQCb/ldcOq4+7r0Jxg5x9pzaJ5oHchLuwm6d09l6as69wKFbDA58tLPFINMRROC19+Jav9oI3KVau1Krb+VOu+hC+3Jxx6lWXjxNPsxVTmxwoCTImgpmcYEl5VdDLG7w1dOUxGzkfNfxAx058obitPNrxrHrweflEyipNJTr94gIPQYGl/ra/GzrN+6PCzdXcElp41YlihjrZkx72ceusi8Hyzwdtp2gcxD2P1Z4Z1WrBSonPEoUIh3yis6nOKbS48MgWsIvL7Iz/d3Xc3iPxiLWpGwxgY0HOOp38aW/cMgnyUbFUvK7XQszAKhu+059XDRmehYrRp0HTzCKUbHkNKuDP6spdnwS96Asup8f7C6QVblleyFsPCKG3xnl0KmNTe1A73fMQyi9KQJrx/CWckqLmtY9oSdr19CcAo/lx+RwJVD75bnevKN8HcJHyM2XNrf1sahiS6fp/l81sbvDgOytT9FXHOf6By9m8TgAp1Nzpfwba7N8seeXtDXSKfSouIXITd9K9w3rij9Gcmn0=
+    on_success: change
+    on_failure: always

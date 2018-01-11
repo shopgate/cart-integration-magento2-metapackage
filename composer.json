@@ -1,5 +1,5 @@
 {
-  "name": "shopgate/cart-integration-magento2-metapackage",
+  "name": "shopgate/m2",
   "description": "Shopgate meta package containing the necessary modules to synchronize data across servers.",
   "license": "Apache-2.0",
   "version": "2.9.6",
