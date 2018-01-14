@@ -12,6 +12,7 @@ jobs:
     before_script: skip
     script:
     - if [[ "$TRAVIS_TAG" ]]; then
+        sed -i 's/cart-integration-magento2-//g' composer.json;
         zip shopgate_m2-${TRAVIS_TAG}.zip composer.json;
       fi
     deploy:
