@@ -13,12 +13,12 @@ jobs:
     script:
     - if [[ "$TRAVIS_TAG" ]]; then
         sed -i 's/cart-integration-magento2-//g' composer.json;
-        zip shopgate_m2-${TRAVIS_TAG}.zip composer.json;
+        zip shopgate-m2-${TRAVIS_TAG}.zip composer.json;
       fi
     deploy:
       provider: releases
       api_key: ${GITHUB_TOKEN}
-      file: shopgate_m2-${TRAVIS_TAG}.zip
+      file: shopgate-m2-${TRAVIS_TAG}.zip
       skip_cleanup: true
       on:
         tags: true

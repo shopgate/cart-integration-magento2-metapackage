@@ -5,7 +5,7 @@
   "version": "2.9.7",
   "type": "metapackage",
   "require": {
-    "php": "~5.5.22|~5.6.0|7.0.2|7.0.4|~7.0.6|~7.1.0",
+    "php": "~5.6.0|7.0.2|7.0.4|~7.0.6|~7.1.0",
     "shopgate/cart-integration-magento2-base": "2.9.8",
     "shopgate/cart-integration-magento2-export": "2.9.8",
     "shopgate/cart-integration-magento2-import": "2.9.7"
