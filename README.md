@@ -4,7 +4,7 @@
 
 Go to Magento 2 root folder and add magento metapackage name to the require list, e.g.:
 ```
-composer require shopgate/cart-integration-magento2-m2:2.9.17
+composer require shopgate/cart-integration-magento2-m2:2.9.18
 ```
 
 This will install all three extensions required for Shopgate to run in the vendors/shopgate folder:
