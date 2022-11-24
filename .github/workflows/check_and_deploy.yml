@@ -21,13 +21,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          name: Shopgate Cart Integration Magento 2 Meta Package ${{ github.ref }}
+          tag_name: ${{ steps.set-tag.outputs.TAG_NAME }}
+          name: Shopgate Cart Integration Magento 2 Meta Package ${{ steps.set-tag.outputs.TAG_NAME }}
           draft: true
           prerelease: true
           fail_on_unmatched_files: true
-          files: |
-            ./shopgate-m2-${{ steps.set-tag.outputs.TAG_NAME }}.zip
+          files: ./shopgate-m2-${{ steps.set-tag.outputs.TAG_NAME }}.zip
 
   notify-release-success:
     name: Notify developers of new release
