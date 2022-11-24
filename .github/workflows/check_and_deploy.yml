@@ -8,9 +8,9 @@ jobs:
     steps:
       - name: Get tag name
         id: set-tag
-        run: echo ::set-output name=TAG_NAME::${GITHUB_REF:10}
+        run: echo "TAG_NAME=${GITHUB_REF:10}" >> $GITHUB_OUTPUT
       - name: Check out repository code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Replace package names in composer.json
         run: sed -i 's/cart-integration-magento2-//g' composer.json
       - name: Build ZIP
@@ -22,17 +22,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-          release_name: Shopgate Cart Integration Magento 2 Meta Package ${{ github.ref }}
+          name: Shopgate Cart Integration Magento 2 Meta Package ${{ github.ref }}
           draft: true
-      - name: Upload ZIP to GitHub release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./shopgate-m2-${{ steps.set-tag.outputs.TAG_NAME }}.zip
-          asset_name: shopgate-m2-${{ steps.set-tag.outputs.TAG_NAME }}.zip
-          asset_content_type: application/zip
+          prerelease: true
+          fail_on_unmatched_files: true
+          files: |
+            ./shopgate-m2-${{ steps.set-tag.outputs.TAG_NAME }}.zip
 
   notify-release-success:
     name: Notify developers of new release
@@ -44,7 +39,7 @@ jobs:
     steps:
       - name: Get tag name
         id: set-tag
-        run: echo ::set-output name=TAG_NAME::${GITHUB_REF:10}
+        run: echo "TAG_NAME=${GITHUB_REF:10}" >> $GITHUB_OUTPUT
       - name: Notify on Slack
         uses: rtCamp/action-slack-notify@v2
         env:
@@ -64,7 +59,7 @@ jobs:
     steps:
       - name: Get tag name
         id: set-tag
-        run: echo ::set-output name=TAG_NAME::${GITHUB_REF:10}
+        run: echo "TAG_NAME=${GITHUB_REF:10}" >> $GITHUB_OUTPUT
       - name: Notify on Slack
         uses: rtCamp/action-slack-notify@v2
         env:
