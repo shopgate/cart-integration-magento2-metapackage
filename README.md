@@ -6,7 +6,7 @@ References the extensions required for a Shopgate Go integration.
 
 Go to Magento 2 root folder and require the package via Composer:
 ```
-composer require shopgate/cart-integration-magento2-m2:^2.9.34 --update-with-dependencies
+composer require shopgate/cart-integration-magento2-m2:^2.9.37 --update-with-dependencies
 ```
 
 This will install all three extensions required for Shopgate to run in the vendors/shopgate folder:
